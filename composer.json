@@ -1,0 +1,19 @@
+{
+  "name": "zvse/domain_commerce_locale",
+  "description": "Module allows to select different locale settings for commerce for the different domains",
+  "type": "drupal-module",
+  "license": "GPL-2.0+",
+  "keywords": ["domain", "locale", "drupal"],
+  "homepage": "https://github.com/zvse/drupal_domain_commerce_locale",
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Yaroslav Lushnikov",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "drupal/domain": "*",
+    "drupal/commerce": "*"
+  }
+}

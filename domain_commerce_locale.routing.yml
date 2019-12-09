@@ -1,0 +1,9 @@
+domain_commerce_locale.settings:
+  path: '/admin/config/domain/domain_commerce_locale'
+  defaults:
+    _form: '\Drupal\domain_commerce_locale\Form\DomainCommerceLocaleSettings'
+    _title: 'Domain Commerce locale'
+  requirements:
+    _permission: 'domain commerce locale settings'
+  options:
+    _admin_route: TRUE

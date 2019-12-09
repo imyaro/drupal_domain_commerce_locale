@@ -1,0 +1,6 @@
+services:
+  domain_commerce_locale.locale_resolver:
+    class: Drupal\domain_commerce_locale\Resolver\DomainCommerceLocaleResolver
+    arguments: ['@domain.negotiator', '@config.factory', '@commerce.current_country', '@language_manager']
+    tags:
+      - { name: commerce.locale_resolver }

@@ -1,0 +1,4 @@
+domain_commerce_locale.settings:
+  title: Domain Commerce locale settings
+  route_name: domain_commerce_locale.settings
+  base_route: domain.admin

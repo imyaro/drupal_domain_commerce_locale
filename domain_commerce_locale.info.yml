@@ -1,0 +1,10 @@
+name: Domain Commerce Locale
+type: module
+description: Module allows to select different locale settings for commerce for the different domains.
+package: Domain
+core: 8.x
+
+dependencies:
+  - domain
+  - commerce
+  - address
