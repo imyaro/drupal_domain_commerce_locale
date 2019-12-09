@@ -29,11 +29,15 @@ class DomainCommerceLocaleResolver implements LocaleResolverInterface {
   private $configFactory;
 
   /**
+   * Current country object.
+   *
    * @var \Drupal\commerce\CurrentCountryInterface
    */
   private $currentCountry;
 
   /**
+   * Language manager.
+   *
    * @var \Drupal\Core\Language\LanguageManagerInterface
    */
   private $languageManager;
@@ -58,16 +62,20 @@ class DomainCommerceLocaleResolver implements LocaleResolverInterface {
     $activeDomain = $this->domainNegotiator->getActiveDomain();
     $settings = $this->configFactory->get('domain_commerce_locale.settings');
 
+    // Checking that domain exists in the current configuration.
     if ($domainConfig = $settings->get($activeDomain->id())) {
+      // Change language if exists.
       if (!isset($domainConfig['language'])) {
         $domainConfig['language'] = $this->languageManager->getCurrentLanguage()->getId();
       }
+      // Change country if exists.
       if (!isset($domainConfig['country'])) {
         $domainConfig['country'] = $this->currentCountry->getCountry()->getCountryCode();
       }
 
+      // Full locale is like en-GB (language-country). But sometimes language
+      // contains country already, so we have to handle this case.
       $languageParts = explode('-', $domainConfig['language']);
-
       if (count($languageParts) > 1) {
         $domainConfig['language'] = $languageParts[0];
       }
@@ -77,6 +85,7 @@ class DomainCommerceLocaleResolver implements LocaleResolverInterface {
       return new Locale($localeId);
     }
 
+    // It is a resolver, NULL means that next resolver will be used.
     return NULL;
   }
 

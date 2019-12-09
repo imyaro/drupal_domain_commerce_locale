@@ -13,20 +13,29 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class DomainCommerceLocaleSettings extends ConfigFormBase {
 
   /**
+   * Entity type manager object.
+   *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   private $entityTypeManager;
 
   /**
+   * Country repository.
+   *
    * @var \CommerceGuys\Addressing\Country\CountryRepositoryInterface
    */
   private $countryRepository;
 
   /**
+   * Language manager.
+   *
    * @var \Drupal\Core\Language\LanguageManagerInterface
    */
   private $languageManager;
 
+  /**
+   * {@inheritDoc}
+   */
   public function __construct(ConfigFactoryInterface $configFactory, EntityTypeManagerInterface $entityTypeManager, CountryRepositoryInterface $countryRepository, LanguageManagerInterface $languageManager) {
     parent::__construct($configFactory);
     $this->entityTypeManager = $entityTypeManager;
@@ -34,6 +43,9 @@ class DomainCommerceLocaleSettings extends ConfigFormBase {
     $this->languageManager = $languageManager;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
@@ -57,6 +69,9 @@ class DomainCommerceLocaleSettings extends ConfigFormBase {
     return 'domain_commerce_locale_settings_form';
   }
 
+  /**
+   * {@inheritDoc}
+   */
   function buildForm(array $form, FormStateInterface $form_state) {
     $domainStorage = $this->entityTypeManager->getStorage('domain');
     /** @var \Drupal\domain\DomainInterface[] $domains */
@@ -64,7 +79,7 @@ class DomainCommerceLocaleSettings extends ConfigFormBase {
 
     $config = $this->configFactory()->get('domain_commerce_locale.settings');
 
-
+    // Single settings form for all domains.
     foreach ($domains as $domain) {
       $domainId = $domain->id();
       $domainLabel = $domain->label();
